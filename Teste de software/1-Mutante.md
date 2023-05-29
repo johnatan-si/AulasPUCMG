@@ -113,23 +113,39 @@ def foo(a, b):
 
 Para o código anterior, temos o caso de teste  a seguir. Para esse caso de teste  um tipo de mutante ficará vivo. Modifique o  caso de teste de tal forma que ele seja capaz de matar esse mutante. Veja o código a seguir: 
 
-````
-import unittest
+    import unittest
+    
+    from Foo import foo
+    
+    class TestMethod(unittest.TestCase):
+    
+    	def test_case1(self):
+    		self.assertEqual(foo(1,1), 2, "Precisa ser 2")
+    
+    	def test_case2(self):
+    		self.assertEqual(foo(-1,1), 1, "Precisa ser 1")
+    
+    	def test_case3(self):
+    		self.assertEqual(foo(-1,-1), 1,  "Precisa ser 1")
+    if __name__ == "__main__":
+        unittest.main()
 
-from Foo import foo
 
-class TestMethod(unittest.TestCase):
+## Rodar os casos de testecom mut.py
 
-	def test_case1(self):
-		self.assertEqual(foo(1,1), 2, "Precisa ser 2")
+> mut.py --target Foo --unit-test testaFoo -m
 
-	def test_case2(self):
-		self.assertEqual(foo(-1,1), 1, "Precisa ser 1")
+## Implementação e Relatório
 
-	def test_case3(self):
-		self.assertEqual(foo(-1,-1), 1,  "Precisa ser 1")
+1.  O arquivo  `Foo.py`  contém a implementação da funcionalidade;
+2.  O arquivo  `testaFoo.py`  é a primeira versão da suíte de testes;
+3.  O arquivo  `testaFoo2.py`  é a segunda versão da suíte de testes, gerada após a execução do teste de mutação;
+4.  O arquivo  `out.txt`  contém o resultado final da execução do teste de mutação.
 
+## Para análises de cobertura de comandos
 
-if __name__ == '__main__':
-    unittest.main()
-    ````
+> coverage run -m unittest testaFoo coverage report -m
+
+## Para análises de cobertura de branch
+
+> coverage run --branch -m unittest testaFoo coverage report -m
