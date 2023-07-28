@@ -1,2 +1,2 @@
-# AulasPUCMG
-Repositório para armazenar conteúdos de aulas práticas na PUC MG. 
+# Aulas PUCMG
+Repositório para armazenar conteúdos de aulas na PUC MG. 
