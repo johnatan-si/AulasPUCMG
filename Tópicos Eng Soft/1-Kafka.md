@@ -50,7 +50,7 @@ Agora TEMOS O  ambiente básico do Apache Kafka configurado e um tópico de stre
 
 Este é apenas um exemplo introdutório. O Apache Kafka oferece muitos recursos avançados, como particionamento, replicação e controle de offset, para lidar com cenários mais complexos.
 
-Lembre-se de que este tutorial cobre apenas os passos básicos. À medida que APRENDERMOS MAIS NA DISCIPLINA, iremos  explora mais sobre o Apache Kafka. Dessa forma, você poderá mergulhar em configurações avançadas e casos de uso mais elaborados.
+Lembre-se de que esta  aula cobre apenas os passos básicos. À medida que APRENDERMOS MAIS NA DISCIPLINA, iremos  explora mais sobre o Apache Kafka. Dessa forma, você poderá mergulhar em configurações avançadas e casos de uso mais elaborados.
 
 
 
