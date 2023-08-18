@@ -40,8 +40,10 @@ kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor
 -   Adicione algumas linhas de texto a este arquivo, como se fossem logs. Por exemplo:
     
 
-`ERROR: Erro na aplicação.  INFO: João acessou a plataforma.  
-WARNING: Maria tentou acessar com senha incorreta.  INFO: Sistema inicializado com sucesso.` 
+    ERROR: Erro na aplicação.  
+    INFO: João acessou a plataforma.  
+    WARNING: Maria tentou acessar com senha incorreta. 
+    INFO: Sistema inicializado com sucesso. 
 
 4.2. Produzindo mensagens a partir de `logs.txt`:
 
