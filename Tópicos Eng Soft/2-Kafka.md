@@ -1,83 +1,61 @@
-# Passo 1: Você já tem o Kafka instalado, né ? Se não tem , instale! 
 
-### Passo 2: Inicie o ZooKeeper
+### **Tutorial Kafka no Windows**
 
-> bin/zookeeper-server-start.sh config/zookeeper.properties
+**1. Instalação e Configuração**
 
-### Passo 3: Inicie o Kafka Broker
+TÔ SUPONDO QUE ESSE PASSO VOCÊ JÁ FEZ, NÉ? 
 
-> bin/kafka-server-start.sh config/server.properties
+1.2. Extraia o arquivo baixado para um diretório de sua escolha, por exemplo: `C:\kafka_3.5.1`.
 
+**2. Iniciando o Zookeeper e o Kafka**
 
-### Passo 4: Criar um Tópico
+2.1. Abra o terminal e navegue até a pasta `bin\windows`:
 
-> bin/kafka-topics.sh --create --topic vendas --bootstrap-server
-> localhost:9092 --partitions 1 --replication-factor 1
+bashCopy code
 
-### Passo 5: Produtor de Vendas
+`cd C:\kafka_3.5.1\bin\windows` 
 
-Crie um arquivo chamado `vendas-producer.py`:
+2.2. Inicie o ZooKeeper:
 
+`zookeeper-server-start.bat ..\..\config\zookeeper.properties` 
 
-    from kafka import KafkaProducer
-    import json
+2.3. Abra um novo terminal e novamente navegue até `bin\windows` e inicie o servidor Kafka:
+
+`cd C:\kafka_3.5.1\bin\windows
+kafka-server-start.bat ..\..\config\server.properties` 
+
+**3. Criando um Tópico no Kafka**
+
+3.1. Em um novo terminal, crie um tópico chamado "meu_topico":
+
+`cd C:\kafka_3.5.1\bin\windows
+kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic meu_topico` 
+
+**4. Produzindo e Consumindo Mensagens com Kafka**
+
+4.1. Criando um arquivo de logs:
+
+-   No diretório `C:\kafka_3.5.1\bin\windows`, crie um arquivo chamado `logs.txt`.
     
-    producer = KafkaProducer(bootstrap_servers='localhost:9092', value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+-   Adicione algumas linhas de texto a este arquivo, como se fossem logs. Por exemplo:
     
-    venda = {
-        "produto_id": "123",
-        "quantidade": 5,
-        "valor_total": 250.0
-    }
-    
-    producer.send('vendas', venda)
-    print("Venda registrada:", venda)
+
+`ERROR: Erro na aplicação.  INFO: João acessou a plataforma.  
+WARNING: Maria tentou acessar com senha incorreta.  INFO: Sistema inicializado com sucesso.` 
+
+4.2. Produzindo mensagens a partir de `logs.txt`:
+
+Navegue até `bin\windows` (se já não estiver lá) e execute:
 
 
-### Passo 6: Consumidor de Estoque
+`kafka-console-producer.bat --broker-list localhost:9092 --topic meu_topico < logs.txt` 
 
-Crie um arquivo chamado `estoque-consumer.py`:
+4.3. Consumindo mensagens:
 
-    from kafka import KafkaConsumer
-    import json
-    
-    consumer = KafkaConsumer('vendas', bootstrap_servers='localhost:9092', value_deserializer=lambda v: json.loads(v.decode('utf-8')))
-    
-    for message in consumer:
-        venda = message.value
-        print("Venda recebida:", venda)
+Em um novo terminal:
 
 
-### Passo 7: Consumidor de Relatórios
+`cd C:\kafka_3.5.1\bin\windows
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic meu_topico --from-beginning` 
 
-Crie um arquivo chamado `relatorios-consumer.py`:
-
-    from kafka import KafkaConsumer
-    import json
-    
-    consumer = KafkaConsumer('vendas', bootstrap_servers='localhost:9092', value_deserializer=lambda v: json.loads(v.decode('utf-8')))
-    
-    for message in consumer:
-        venda = message.value
-        print("Relatório gerado para a venda:", venda)
-
-### Passo 8: Execute os Consumidores e Produtores
-
-Abra três terminais e execute cada script de consumidor e o produtor:
-
-**Terminal 1:**
-
-> python vendas-producer.py
-
-**Terminal 2:**
-
-> python estoque-consumer.py
-
-
-**Terminal 3:**
- 
-
-> python relatorios-consumer.py
-
-
-Isso é apenas um exemplo básico para entender como o Kafka pode ser usado. Em um ambiente de produção real, você precisaria considerar aspectos como o gerenciamento de erros, particionamento, replicação, e muito mais.
+Agora, você deve ver as linhas do arquivo `logs.txt` aparecendo como mensagens no consumidor.
