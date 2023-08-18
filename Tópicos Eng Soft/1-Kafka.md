@@ -1,12 +1,12 @@
-## Configurando e Usando o Apache Kafka no Linux e Windows
+## Configurando e Usando o Apache Kafka no Windows
 
 Nessa aula  vamos aprender os passos necessários para configurar um ambiente básico do Apache Kafka no Linux e Windows, e criar um tópico de streaming para coletar dados em tempo real. O Apache Kafka é uma plataforma poderosa para streaming de dados em ambientes de Big Data.
 
 
 **Passo 1: Instalação do Apache Kafka**
 
-1.  Faça o download do Apache Kafka em [https://kafka.apache.org/downloads](https://kafka.apache.org/downloads).
-2.  Extraia o arquivo baixado para uma pasta de sua escolha.
+1.  Faça o download do Apache Kafka em [[https://kafka.apache.org/downloads](https://downloads.apache.org/kafka/3.5.1/kafka_2.13-3.5.1.tgz)](https://downloads.apache.org/kafka/3.5.1/kafka_2.13-3.5.1.tgz).
+2.  Extraia o arquivo baixado para uma pasta c:
 3.  Acesse a pasta do Kafka usando o terminal.
 
 **Passo 2: Iniciar o Servidor do ZooKeeper**
@@ -16,33 +16,37 @@ O Apache Kafka depende do servidor do ZooKeeper para coordenar e gerenciar os n�
 > bin/zookeeper-server-start.sh config/zookeeper.properties
 
 
+
 **Passo 3: Iniciar o Servidor do Kafka**
 
-Agora, inicie o servidor do Kafka executando o seguinte comando:
+Agora, inicie o servidor do Kafka executando o seguinte comando EM OUTRO TERMINAL:
 
 > bin/kafka-server-start.sh config/server.properties
 
+
 **Passo 4: Criar um Tópico**
 
-Vamos criar um tópico chamado "dados-em-tempo-real" usando o seguinte comando:
+EM OUTRO TERMINAL vamos criar um tópico chamado "dados-em-tempo-real" usando o seguinte comando:
 
 
-> bin/kafka-topics.sh --create --topic dados-em-tempo-real
-> --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+> bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic meu_topico
+
 
 **Passo 5: Produzir Dados para o Tópico**
 
-Agora, vamos produzir dados simulados para o tópico "dados-em-tempo-real":
+EM OUTRO TERMINAL vamos produzir dados simulados para o tópico "dados-em-tempo-real":
 
-> bin/kafka-console-producer.sh --topic dados-em-tempo-real
-> --bootstrap-server localhost:9092
+> bin/kafka-console-producer.sh --broker-list localhost:9092 --topic meu_topico
+
+Agora, você pode digitar mensagens na linha de comando e elas serão enviadas para o tópico.
 
 **Passo 6: Consumir Dados do Tópico**
 
 Em uma nova janela do terminal, vamos consumir os dados do tópico "dados-em-tempo-real":
 
-> bin/kafka-console-consumer.sh --topic dados-em-tempo-real
-> --bootstrap-server localhost:9092
+> bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic meu_topico --from-beginning
+
+Você deve ver as mensagens que digitou no produtor sendo exibidas no consumidor.
 
 **Passo 7: Experimente!**
 
