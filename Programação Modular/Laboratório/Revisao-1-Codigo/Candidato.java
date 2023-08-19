@@ -1,19 +1,29 @@
-import java.util.List;
-
 public class Candidato {
     private String nome;
-    private List<Integer> habilidades;
+    private int[] pontuacoesHabilidades;
 
-    public Candidato(String nome, List<Integer> habilidades) {
+    public Candidato(String nome, int[] pontuacoesHabilidades) {
         this.nome = nome;
-        this.habilidades = habilidades;
+        this.pontuacoesHabilidades = pontuacoesHabilidades;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public List<Integer> getHabilidades() {
-        return habilidades;
+    public int getPontuacaoHabilidade(int indice) {
+        if (indice >= 0 && indice < pontuacoesHabilidades.length) {
+            return pontuacoesHabilidades[indice];
+        } else {
+            return -1; // Valor inválido
+        }
+    }
+
+    public int getPontuacaoTotal() {
+        int total = 0;
+        for (int pontuacao : pontuacoesHabilidades) {
+            total += pontuacao;
+        }
+        return total;
     }
 }

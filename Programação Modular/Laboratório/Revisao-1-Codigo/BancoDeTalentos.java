@@ -1,118 +1,71 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class BancoDeTalentos {
-    private List<Tecnologia> tecnologias;
-    private List<Candidato> candidatos;
 
-    public BancoDeTalentos() {
-        tecnologias = new ArrayList<>();
-        candidatos = new ArrayList<>();
-    }
+    public static void main(String[] args) {
+        try {
+            BancoDeHabilidades bdh = new BancoDeHabilidades("Programa\u00E7\u00E3o Modular\\Laborat\u00F3rio\\Revisao-1-Codigo\\arquivo1.txt", "Programa\u00E7\u00E3o Modular\\Laborat\u00F3rio\\Revisao-1-Codigo\\arquivo2.txt");
 
-    public void lerArquivoTecnologias(String nomeArquivo) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                tecnologias.add(new Tecnologia(linha));
-            }
-        }
-    }
+            Scanner sc = new Scanner(System.in);
+            boolean sair = false;
 
-    public void lerArquivoCandidatos(String nomeArquivo) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(";");
-                String nome = dados[0];
-                List<Integer> habilidades = new ArrayList<>();
-                for (int i = 1; i < dados.length; i++) {
-                    habilidades.add(Integer.parseInt(dados[i]));
+            while (!sair) {
+                System.out.println("\n---- Menu ----");
+                System.out.println("1. Melhor candidato para uma habilidade");
+                System.out.println("2. Melhor candidato para habilidade obrigatória e outra importante");
+                System.out.println("3. Melhor candidato considerando todas as habilidades");
+                System.out.println("4. Sair");
+                System.out.print("Escolha uma opção: ");
+
+                int escolha = sc.nextInt();
+                sc.nextLine();  
+                switch (escolha) {
+                    case 1:
+                        System.out.print("Digite o nome da habilidade: ");
+                        String habilidade = sc.nextLine();
+                        int indiceHabilidade = bdh.getTecnologias().indexOf(habilidade);
+                        if (indiceHabilidade != -1) {
+                            Candidato melhorCandidato = bdh.melhorCandidatoParaHabilidade(indiceHabilidade);
+                            System.out.println("Melhor candidato para " + habilidade + ": " + melhorCandidato.getNome());
+                        } else {
+                            System.out.println("Habilidade não encontrada.");
+                        }
+                        break;
+
+                    case 2:
+                        System.out.print("Digite a habilidade obrigatória: ");
+                        String habilidadeObrig = sc.nextLine();
+                        System.out.print("Digite a habilidade importante: ");
+                        String habilidadeImp = sc.nextLine();
+                        
+                        int indiceHabilidadeObrig = bdh.getTecnologias().indexOf(habilidadeObrig);
+                        int indiceHabilidadeImp = bdh.getTecnologias().indexOf(habilidadeImp);
+                        
+                        if (indiceHabilidadeObrig != -1 && indiceHabilidadeImp != -1) {
+                            Candidato candidato = bdh.melhorCandidatoParaDuasHabilidades(indiceHabilidadeObrig, indiceHabilidadeImp);
+                            System.out.println("Melhor candidato para as habilidades " + habilidadeObrig + " e " + habilidadeImp + ": " + candidato.getNome());
+                        } else {
+                            System.out.println("Uma ou ambas as habilidades não foram encontradas.");
+                        }
+                        break;
+
+                    case 3:
+                        Candidato candidatoGeral = bdh.melhorCandidatoGeral();
+                        System.out.println("Melhor candidato considerando todas as habilidades: " + candidatoGeral.getNome());
+                        break;
+
+                    case 4:
+                        sair = true;
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida. Tente novamente.");
+                        break;
                 }
-                candidatos.add(new Candidato(nome, habilidades));
             }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler os arquivos: " + e.getMessage());
         }
-    }
-
-    public String melhorCandidatoPorHabilidade(String habilidade) {
-        int indiceHabilidade = tecnologias.indexOf(new Tecnologia(habilidade));
-        if (indiceHabilidade == -1) {
-            return "Habilidade nao encontrada.";
-        }
-
-        Candidato melhorCandidato = null;
-        int maiorHabilidade = -1;
-
-        for (Candidato candidato : candidatos) {
-            int habilidadeCandidato = candidato.getHabilidades().get(indiceHabilidade);
-            if (habilidadeCandidato > maiorHabilidade) {
-                melhorCandidato = candidato;
-                maiorHabilidade = habilidadeCandidato;
-            }
-        }
-
-        return melhorCandidato.getNome();
-    }
-
-    public String melhorCandidatoPorDuasHabilidades(String habilidade1, String habilidade2) {
-        int indiceHabilidade1 = tecnologias.indexOf(new Tecnologia(habilidade1));
-        int indiceHabilidade2 = tecnologias.indexOf(new Tecnologia(habilidade2));
-        if (indiceHabilidade1 == -1 || indiceHabilidade2 == -1) {
-            return "Pelo menos uma das habilidades nao foi encontrada.";
-        }
-
-        Candidato melhorCandidato = null;
-        int maiorSomaHabilidades = -1;
-
-        for (Candidato candidato : candidatos) {
-            int habilidadeCandidato1 = candidato.getHabilidades().get(indiceHabilidade1);
-            int habilidadeCandidato2 = candidato.getHabilidades().get(indiceHabilidade2);
-            int somaHabilidades = habilidadeCandidato1 + habilidadeCandidato2;
-            if (somaHabilidades > maiorSomaHabilidades) {
-                melhorCandidato = candidato;
-                maiorSomaHabilidades = somaHabilidades;
-            }
-        }
-
-        return melhorCandidato.getNome();
-    }
-
-    public String candidatoMaisInteressante() {
-        Candidato candidatoMaisInteressante = null;
-        int maiorSomaHabilidades = -1;
-
-        for (Candidato candidato : candidatos) {
-            int somaHabilidades = candidato.getHabilidades().stream().mapToInt(Integer::intValue).sum();
-            if (somaHabilidades > maiorSomaHabilidades) {
-                candidatoMaisInteressante = candidato;
-                maiorSomaHabilidades = somaHabilidades;
-            }
-        }
-
-        return candidatoMaisInteressante.getNome();
-    }
-
-    public static void main(String[] args) throws IOException {
-        BancoDeTalentos bancoDeTalentos = new BancoDeTalentos();
-        bancoDeTalentos.lerArquivoTecnologias("arquivo1.txt");
-        bancoDeTalentos.lerArquivoCandidatos("arquivo2.txt");
-
-        String habilidade1 = "Java";
-        String habilidade2 = "Front-end";
-        String habilidadeObrigatoria = "Back-end";
-        String habilidadeImportante = "Python";
-
-        String melhorCandidatoHabilidade1 = bancoDeTalentos.melhorCandidatoPorHabilidade(habilidade1);
-        String melhorCandidatoHabilidade2 = bancoDeTalentos.melhorCandidatoPorHabilidade(habilidade2);
-        String melhorCandidatoDuasHabilidades = bancoDeTalentos.melhorCandidatoPorDuasHabilidades(habilidadeObrigatoria, habilidadeImportante);
-        String candidatoMaisInteressante = bancoDeTalentos.candidatoMaisInteressante();
-
-        System.out.println("Melhor candidato em " + habilidade1 + ": " + melhorCandidatoHabilidade1);
-        System.out.println("Melhor candidato em " + habilidade2 + ": " + melhorCandidatoHabilidade2);
-        System.out.println("Melhor candidato com habilidade obrigatoria em " + habilidadeObrigatoria + " e importante em " + habilidadeImportante + ": " + melhorCandidatoDuasHabilidades);
-        System.out.println("Candidato mais interessante: " + candidatoMaisInteressante);
     }
 }
