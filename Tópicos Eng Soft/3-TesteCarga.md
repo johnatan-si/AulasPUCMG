@@ -1,4 +1,5 @@
 
+
 ### Teste de Carga usando Teste Unitário em Python
 
 Na aula de hoje, faremos um abuso do uso dos testes unitários para simular um teste de carga. Embora testes de unidade normalmente não sejam usados para testes de carga, é possível simular um cenário básico de carga usando o módulo `unittest` do Python. A seguir, detalharemos um exercício prático sobre isso.
@@ -8,11 +9,11 @@ Na aula de hoje, faremos um abuso do uso dos testes unitários para simular um t
 Primeiro, criaremos uma função simples que simula a recuperação de uma grande quantidade de dados:
 
 
-`def get_big_data():
-    # Simula um atraso para obter os dados, como se fosse uma operação pesada
-    import time
-    time.sleep(0.1)  # simula um atraso de 100ms
-    return [i for i in range(10000)]  # retornando uma lista com 10.000 números` 
+    def get_big_data():
+        # Simula um atraso para obter os dados, como se fosse uma operação pesada
+        import time
+        time.sleep(0.1)  # simula um atraso de 100ms
+        return [i for i in range(10000)]  # retornando uma lista com 10.000 números
 
 #### 2. Criando o Teste de Carga
 
