@@ -1,5 +1,0 @@
-Java
-Front-end
-Python
-Back-end
-Gerência de projetos
