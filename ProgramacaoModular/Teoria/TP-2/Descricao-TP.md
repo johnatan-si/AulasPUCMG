@@ -68,12 +68,9 @@ Todos os alunos, pertencentes a um grupo de 3 a 5 pessoas, devem colaborar ativa
    - **Convenções (0,25 pontos):** Uso de boas práticas.
 
 4. **Robustez e Tratamento de Erros (1 ponto):**
-   - **Tratamento de Exceções (0,5 pontos):** Lidar com situações inesperadas.
-   - **Testes (0,25 pontos):** Apresentação de testes.
-   - **Consistência (0,25 pontos):** Garantia de consistência dos dados.
+   - **Testes (1 pontos):** Apresentação de testes com JUnit.
 
 5. **Apresentação e Diagrama (1 ponto):**
    - **Clareza do Diagrama (0,5 pontos):** Representação visual clara.
-   - **Correspondência com Código (0,25 pontos):** Fidelidade do diagrama ao código.
-   - **Qualidade da Apresentação (0,25 pontos):** Capacidade de explicação.
+   - **Correspondência com Código (0,5 pontos):** Fidelidade do diagrama ao código.
 
