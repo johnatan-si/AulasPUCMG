@@ -36,6 +36,7 @@ O XuBank é uma fintech emergente que precisa de um sistema modular e confiável
 4. Crie um menu no terminal para operações.
 5. Crie um diagrama de classes.
 6. Garanta a encapsulação dos dados.
+7. Por fim, todas as boas práticas da Programação Modular devem ser mantidas!
 
 ### Entrega:
 
