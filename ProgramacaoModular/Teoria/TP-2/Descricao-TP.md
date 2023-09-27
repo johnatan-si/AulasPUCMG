@@ -37,10 +37,17 @@ O XuBank é uma fintech emergente que precisa de um sistema modular e confiável
 5. Crie um diagrama de classes.
 6. Garanta a encapsulação dos dados.
 7. Por fim, todas as boas práticas da Programação Modular devem ser mantidas!
+   
+### Entrega: 
 
-### Entrega:
+Todos os alunos, pertencentes a um grupo de 3 a 5 pessoas, devem colaborar ativamente na escrita do código-fonte. A colaboração de cada membro do grupo deve ser comprovada através dos commits realizados no repositório do GitHub.
 
-Apresente o código-fonte e o diagrama de classes.
+- **Repositório no GitHub:** Submeta no sistema Canvas o link do repositório do GitHub contendo o código-fonte e o diagrama de classes.
+  
+- **Commits:** Certifique-se de que todos os membros do grupo tenham realizado commits, demonstrando sua contribuição ao projeto. Não serão aceitos commits feitos após a data de entrega da atividade.
+
+- **Diagrama de Classes:** O repositório também deve conter o diagrama de classes desenvolvido para o projeto.
+
 
 ### Critérios de Avaliação (Total: 5 pontos):
 
