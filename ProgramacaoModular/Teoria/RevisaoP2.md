@@ -137,3 +137,42 @@ public class Alerta implements Notificacao {
 ````
 
 Qual princípio SOLID está sendo comprometido e por quê?
+
+### 11 -   O que diferencia uma classe abstrata de uma interface em Java?
+
+### 12 Crie uma interface "Voador" que tenha um método "voar".
+
+### 13 Por que não podemos instanciar uma classe abstrata diretamente?
+
+### 14 Dado o código a seguir, torne a classe "Animal" abstrata e adicione um método abstrato "emitirSom".
+
+### 15  Por que Java não suporta herança múltipla e como ela contorna essa limitação?
+
+### 16  Usando interfaces, crie uma estrutura que simula herança múltipla com as classes "Mamífero" e "Voador".
+
+### 17 -    O que é overloading de métodos e como ele é diferente de overriding?
+
+### 18 Crie um método "imprimir" que pode aceitar tanto uma string quanto um número inteiro.
+
+### 19  Explique o conceito de type casting em Java e sua relação com polimorfismo.
+
+### 20 Considere as classes a seguir:
+
+```java
+class Animal { 
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+Dada a instância `Animal myDog = new Dog();`, demonstre como realizar um type casting para chamar o método `sound()` de `Dog`.
+
+### 21 -   O que é coerção explícita e como ela difere da coerção implícita em Java?
+## 22 Dado os seguintes fragmentos de código: double myDouble = 9.78;
+Converta `myDouble` em um `int` usando coerção explícita.
